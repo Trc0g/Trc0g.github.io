@@ -216,7 +216,12 @@ function rgbToHex(r, g, b) {
     var draw = function () {
       ctx.fillStyle='rgba(0,0,0,.05)';
       ctx.fillRect(0,0,width,height);
-      ctx.fillStyle='#FFF5DA';
+      var my_gradient=ctx.createLinearGradient(0,0,0,500);
+      my_gradient.addColorStop(0,"lightcoral");
+      my_gradient.addColorStop(0.5,"lightgoldenrodyellow");
+      my_gradient.addColorStop(1,"lightblue");
+      ctx.fillStyle=my_gradient;
+      // ctx.fillStyle='#FFF5DA';
       ctx.font = '12pt Georgia';
     //  ctx.font = '10pt Nano';
       yPositions.map(function(y, index){
