@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+        Trc0g
+    </title>
+    
+<link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body id="bodyx">
+    <div class="hd posts">
+    <a href="/index.html"><i class="fa fa-reply replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            有人能做到的事情都不叫困难
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <blockquote>
+<p>各种原因让我突然惊醒，决定从现在开始拾起曾经落下的东西，探索未知的领域</p>
+<p>不甘心、不放弃</p>
+</blockquote>
+<h1 id="360-QUAKE-测绘平台"><a href="#360-QUAKE-测绘平台" class="headerlink" title="360 QUAKE 测绘平台"></a>360 QUAKE 测绘平台</h1><h2 id="《平台内的帮助文档》"><a href="#《平台内的帮助文档》" class="headerlink" title="《平台内的帮助文档》"></a>《平台内的帮助文档》</h2><p><strong>用于描述QUAKE全网资产收集及检索系统API使用方法</strong></p>
+<p>发现并感知虚拟网络空间中的各类网络资产和设备并保证安全</p>
+<p>数据库未授权访问、工控系统访问控制页面的暴露、IOT智能硬件设备的入侵、WEB服务0 Day、N day漏洞</p>
+<p>对IPV4、IPV6地址进行持续性测绘工作</p>
+<h3 id="IPV4、IPV6"><a href="#IPV4、IPV6" class="headerlink" title="IPV4、IPV6"></a>IPV4、IPV6</h3><ol>
+<li>IPV6地址空间更大、路由表更小、支持自动配置、具有更高的安全性</li>
+</ol>
+<h2 id="专题"><a href="#专题" class="headerlink" title="专题"></a>专题</h2><h3 id="蜜罐"><a href="#蜜罐" class="headerlink" title="蜜罐"></a>蜜罐</h3><p>目的是引诱黑客前来攻击，并收集黑客相关的证据和信息。相当于情报收集</p>
+<p>蜜罐存在的意义就是——被攻击、被探测、被攻陷</p>
+<p>开发的这些蜜罐工具能够模拟成虚拟的操作系统和网络服务，并对黑客的攻击行为做出回应，从而欺骗黑客。</p>
+<p>分为交互与非交互两个大类：简单的蜜罐更多起到干扰攻击者的作用————高交互蜜罐可以获取更多的攻击者信息（交互性强也更容易被攻陷或被当作跳板）</p>
+<h4 id="如何建立一个基本蜜罐"><a href="#如何建立一个基本蜜罐" class="headerlink" title="如何建立一个基本蜜罐"></a>如何建立一个基本蜜罐</h4><ol>
+<li><p>配置非交互式蜜罐服务器：两个网络接口，一个具有IP地址但没有运行中服务并且禁用所有出站流量（扫描到蜜罐的人不会收到任何回复），一个运行SSH</p>
+</li>
+<li><p>使用数据包嗅探工具：wireshark（解码方便，为每个新的TCP对话分配内存并且永远不会删除TCP会话，耗尽内存）、tshark（wireshark文本版本）、snort（专注于IDS）、BRO（完整IDS系统）、TCPDUMP</p>
+</li>
+<li><p>配置tcpdump：蜜罐只需记录IP地址、端口号和网络协议（TCP、UDP、ICMP），-n阻止主机名和协议查找，</p>
+</li>
+<li><p>分析日志：awk命令打印第4个字段：扫描程序/攻击者的IP地址。对结果进行排序和计数，可以识别谁正在扫描蜜罐</p>
+</li>
+</ol>
+<h4 id="网络路由流量（VRRP，STP和ARP）"><a href="#网络路由流量（VRRP，STP和ARP）" class="headerlink" title="网络路由流量（VRRP，STP和ARP）"></a>网络路由流量（VRRP，STP和ARP）</h4><h4 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h4><p>ICMP没有端口号，ICMP是控制协议不需要端口号（IP层协议是一种点对点的协议不是端对端，提供无连接的数据报服务）</p>
+<h4 id="SIP和windows-SMP"><a href="#SIP和windows-SMP" class="headerlink" title="SIP和windows SMP"></a>SIP和windows SMP</h4><h4 id="IDS"><a href="#IDS" class="headerlink" title="IDS"></a>IDS</h4><h4 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h4><ol>
+<li><p>专为远程登录会话和其他网络服务提供安全性的协议，为传输的数据加密，能够防止DNS欺骗和IP欺骗</p>
+</li>
+<li><p>三部分组成：传输层协议-用户认证协议-连接协议</p>
+</li>
+</ol>
+<h4 id="网络端口映射"><a href="#网络端口映射" class="headerlink" title="网络端口映射"></a>网络端口映射</h4><ol>
+<li><p>NAT：网络地址转换协议（私网IP转为公网IP）：静态转换、动态转换、端口多路复用</p>
+</li>
+<li><p>私有网络地址块：</p>
+<p>A 类：10.0.0.0～10.255.255.255</p>
+<p>B 类：172.16.0.0～172.31.255.255</p>
+<p>C 类：192.168.0.0～192.168.255.255</p>
+</li>
+<li></li>
+</ol>
+<h1 id="弹窗"><a href="#弹窗" class="headerlink" title="弹窗"></a>弹窗</h1><p>灵机一动想试试写一个简单的桌面弹窗进行整蛊，但是VBS不能再MAC上运行，朋友电脑是MAC好头痛哦，想想办法</p>
+<h2 id="VBS"><a href="#VBS" class="headerlink" title="VBS"></a>VBS</h2><ol>
+<li>msgbox “XXXX” or msgbox 变量名   //弹窗文字输出到桌面</li>
+<li>dim //定义变量</li>
+<li>inputbox(变量名or文字)  // 用户输入框</li>
+<li>msgbox 变量名  //变量名=inputbox(变量名)//可以弹出用户输入框到桌面，用户输入语句后点击确定会弹出弹窗</li>
+</ol>
+
+    </div>
+
+    
+        <hr class="fhr">
+        <div id="vcomments"></div>
+    
+</div>
+    <div class="footer" id="footer">
+    <p>Trc0g ©2021 Sunset</a>.
+        <label class="el-switch el-switch-green el-switch-sm" style="vertical-align: sub;">
+            <input type="checkbox" name="switch" id="update_style">
+            <span class="el-switch-style"></span>
+        </label>
+<!--         <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1278548644'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/stat.php%3Fid%3D1278548644%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+        </script> -->
+    </p>
+</div>
+<input type="hidden" id="web_style" value="black">
+<input type="hidden" id="valine_appid" value="CmCti21ooOOIzFOhEyFkFvR0-gzGzoHsz">
+<input type="hidden" id="valine_appKey" value="FqiyUqbg7McKN2eG0MCewupf">
+
+<script src="/libs/jquery.min.js"></script>
+
+
+<script src="/libs/highlight/highlight.pack.js"></script>
+
+<script src='//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+
+<script src="/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+    color: #698fca;
+}
+
+.v .vlist .vcard .vhead .vsys {
+    color: #3a3e4a;
+}
+
+.v .vlist .vcard .vh .vmeta .vat {
+    color: #638fd5;
+}
+
+.v .vlist .vcard .vhead .vnick {
+    color: #6ba1ff;
+}
+
+.v a {
+    color: #8696b1;
+}
+
+.v .vlist .vcard .vhead .vnick:hover {
+    color: #669bfc;
+}
+</style>
+</body>
+
+</html>
