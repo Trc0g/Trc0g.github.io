@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+        Trc0g
+    </title>
+    
+<link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body id="bodyx">
+    <div class="hd posts">
+    <a href="/index.html"><i class="fa fa-reply replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            Python读写操作xlsx文件
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <blockquote>
+<p>学会操作xlsx文件，比如写入xlsx、读取xlsx等，并了解每个函数是如何使用的，最后给个学习记录</p>
+</blockquote>
+<ol>
+<li><p>安装xlrd和xlwt库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip3 install xlrd</span><br><span class="line">pip3 install xlwt</span><br></pre></td></tr></table></figure></li>
+<li><p>思路：创建表格，写入数据，读取数据展示</p>
+</li>
+<li><p>workbook()：创建一个workbook对象，就相当于创建了一个Excel文件</p>
+</li>
+<li><p>参数cell_overwrite_ok，通常设置为True，表示可以对一个单元格重复操作</p>
+</li>
+<li><p>.add_sheet：设置工作表名，一个workbook有多个sheet可以设置多个sheetname</p>
+</li>
+<li><p>write()函数参数对应 行, 列, 值</p>
+</li>
+<li><p>写入和表格的操作，mark：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/iamjianghao/p/10789503.html">https://www.cnblogs.com/iamjianghao/p/10789503.html</a></p>
+</li>
+<li><p>xlrd.open_workbook 打开excel文件读取数据</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xlrd</span><br><span class="line"><span class="keyword">import</span> xlwt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建文档初始化</span></span><br><span class="line">test_file = xlwt.Workbook()</span><br><span class="line">sheet1 = test_file.add_sheet(<span class="string">&#x27;Try_Exel_Operation&#x27;</span>,cell_overwrite_ok=<span class="literal">True</span>)</span><br><span class="line">row_title = [<span class="string">&#x27;Number&#x27;</span>,<span class="string">&#x27;result&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入内容</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(row_title)):</span><br><span class="line">    sheet1.write(<span class="number">0</span>,i,row_title[i])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    sheet1.write(i+<span class="number">1</span>,<span class="number">0</span>,i+<span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    sheet1.write(i+<span class="number">1</span>,<span class="number">1</span>,i*i)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存文档</span></span><br><span class="line">test_file.save(<span class="string">&#x27;D:/!something/python-test/Try_Exel_Operation.xlsx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建读操作的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_excel</span>():</span></span><br><span class="line">    read_file = xlrd.open_workbook(<span class="string">&#x27;D:/!something/python-test/Try_Exel_Operation.xlsx&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 输出工作簿的所有表名</span></span><br><span class="line">    <span class="built_in">print</span> (read_file.sheet_names())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 以表名的方式查找表</span></span><br><span class="line">    resheet1 = read_file.sheet_by_name(<span class="string">&#x27;Try_Exel_Operation&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span> (resheet1.name,resheet1.nrows,resheet1.ncols)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 获取整行和整列的值（数组）</span></span><br><span class="line">    rows = resheet1.row_values(<span class="number">3</span>) <span class="comment"># 获取第四行内容</span></span><br><span class="line">    cols = resheet1.col_values(<span class="number">1</span>) <span class="comment"># 获取第二列内容</span></span><br><span class="line">    <span class="built_in">print</span> (rows)</span><br><span class="line">    <span class="built_in">print</span> (cols)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 获取单元格内容</span></span><br><span class="line">    <span class="built_in">print</span> (resheet1.cell(<span class="number">4</span>,<span class="number">0</span>)) <span class="comment"># 获取第五行第一列的内容</span></span><br><span class="line">    <span class="built_in">print</span> (resheet1.cell_value(<span class="number">2</span>,<span class="number">1</span>)) <span class="comment"># 获取第三行第二列的内容</span></span><br><span class="line">    <span class="built_in">print</span> (resheet1.row(<span class="number">3</span>)[<span class="number">0</span>]) <span class="comment"># 获取第四行第一列的内容</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 获取单元格内容的数据类型</span></span><br><span class="line">    <span class="built_in">print</span> (resheet1.cell(<span class="number">1</span>,<span class="number">0</span>).ctype)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Done!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    read_excel()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/I3MNVJ"><img src="https://z3.ax1x.com/2021/11/07/I3MNVJ.png" alt="I3MNVJ.png"></a></p>
+
+    </div>
+
+    
+        <hr class="fhr">
+        <div id="vcomments"></div>
+    
+</div>
+    <div class="footer" id="footer">
+    <p>Trc0g ©2021 Sunset</a>.
+        <label class="el-switch el-switch-green el-switch-sm" style="vertical-align: sub;">
+            <input type="checkbox" name="switch" id="update_style">
+            <span class="el-switch-style"></span>
+        </label>
+<!--         <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1278548644'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/stat.php%3Fid%3D1278548644%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+        </script> -->
+    </p>
+</div>
+<input type="hidden" id="web_style" value="black">
+<input type="hidden" id="valine_appid" value="CmCti21ooOOIzFOhEyFkFvR0-gzGzoHsz">
+<input type="hidden" id="valine_appKey" value="FqiyUqbg7McKN2eG0MCewupf">
+
+<script src="/libs/jquery.min.js"></script>
+
+
+<script src="/libs/highlight/highlight.pack.js"></script>
+
+<script src='//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+
+<script src="/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+    color: #698fca;
+}
+
+.v .vlist .vcard .vhead .vsys {
+    color: #3a3e4a;
+}
+
+.v .vlist .vcard .vh .vmeta .vat {
+    color: #638fd5;
+}
+
+.v .vlist .vcard .vhead .vnick {
+    color: #6ba1ff;
+}
+
+.v a {
+    color: #8696b1;
+}
+
+.v .vlist .vcard .vhead .vnick:hover {
+    color: #669bfc;
+}
+</style>
+</body>
+
+</html>
