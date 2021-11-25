@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+        Trc0g
+    </title>
+    
+<link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body id="bodyx">
+    <div class="hd posts">
+    <a href="/index.html"><i class="fa fa-reply replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            《图解HTTP》
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <p>[toc]</p>
+<h1 id="第一章-了解web及网络基础"><a href="#第一章-了解web及网络基础" class="headerlink" title="第一章 了解web及网络基础"></a>第一章 了解web及网络基础</h1><ol>
+<li><p>Web是建立在HTTP协议上通信的</p>
+</li>
+<li><p>HTTP属于TCP/IP协议族内部的一个子集</p>
+</li>
+<li><p>应用层：FTP、DNS、HTTP</p>
+<p>传输层：TCP和UDP</p>
+<p>网络层：数据包</p>
+<p>链路层：网卡光纤等硬件</p>
+</li>
+<li><p>IP协议：IP地址可以和MAC地址进行配对，使用ARP（一种用以解析地址的协议）协议凭借MAC地址进行通信</p>
+<p>TCP协议：提供可靠的字节流服务，能确保数据到达对方，三次握手策略（SYN和ACK是使用TCP的标志）</p>
+</li>
+<li><p>DNS：提供域名到IP地址之间的域名解析服务，双方都可查</p>
+</li>
+<li><p>URL是URI的子集</p>
+</li>
+<li><p>如果TCP\IP用域名发请求就一定会用dns</p>
+</li>
+</ol>
+<h1 id="第二章-简单的HTTP协议"><a href="#第二章-简单的HTTP协议" class="headerlink" title="第二章 简单的HTTP协议"></a>第二章 简单的HTTP协议</h1><ol>
+<li><p>用HTTP协议可以明确区分客户端与服务端</p>
+</li>
+<li><p>请求报文是由请求方法、请求URL、协议版本、可选的请求首部字段和内容实体构成</p>
+<p>响应报文基本上由协议版本、状态码、解释状态码的原因短语、可选的响应首部字段、实体主体构成</p>
+</li>
+<li><p>HTTP是无状态协议，不保存之前发送过的请求或响应</p>
+<p>有了cookie再使用HTTP协议通信就可以管理状态了</p>
+</li>
+<li><p>HTTP方法：</p>
+<p>GET用来请求访问已被URL识别的资源；</p>
+<p>POST用来传输实体的主体；</p>
+<p>PUT方法用来传输文件；</p>
+<p>HEAD用于确认URL的有效性与资源更新的时间日期等；</p>
+<p>DELET请求URL删除指定的资源；</p>
+<p>OPTIONS用来询问请求的URL指定的资源请求的方法；</p>
+<p>TRACE让WEB服务器端将之前的请求通信返回给客户端；</p>
+<p>CONNECT要求用隧道协议连接代理；</p>
+</li>
+<li><p>持久连接，HTTP/1.1默认持久连接</p>
+</li>
+<li><p>客户端请求报文（没有cookie）-服务器端响应报文（生成cookie信息）-客户端请求报文（自动携带cookie）</p>
+</li>
+</ol>
+<h1 id="第三章-HTTP报文内的HTTP信息"><a href="#第三章-HTTP报文内的HTTP信息" class="headerlink" title="第三章 HTTP报文内的HTTP信息"></a>第三章 HTTP报文内的HTTP信息</h1><ol>
+<li>HTTP报文大致分为报文首部和报文主体</li>
+<li>编码提升传输效率：压缩传输的内容编码、分块传输编码</li>
+<li>MIME多用途因特网邮件扩展机制</li>
+<li>获取部分内容的范围请求，range字段指定资源byte范围</li>
+<li>内容协商技术：服务器驱动协商、客户端驱动协商、透明协商</li>
+</ol>
+<h1 id="第四章-返回结果的HTTP状态码"><a href="#第四章-返回结果的HTTP状态码" class="headerlink" title="第四章 返回结果的HTTP状态码"></a>第四章 返回结果的HTTP状态码</h1><ol>
+<li><table>
+<thead>
+<tr>
+<th></th>
+<th>类别</th>
+<th>原因短语</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1XX</td>
+<td>信息性状态码</td>
+<td>接收的请求正在处理</td>
+</tr>
+<tr>
+<td>2XX</td>
+<td>成功状态码</td>
+<td>请求正常处理完毕</td>
+</tr>
+<tr>
+<td>3XX</td>
+<td>重定向状态码</td>
+<td>需要进行附加操作以完成请求</td>
+</tr>
+<tr>
+<td>4XX</td>
+<td>客户端错误状态码</td>
+<td>服务器无法处理请求</td>
+</tr>
+<tr>
+<td>5XX</td>
+<td>服务器错误状态码</td>
+<td>服务器处理请求出错</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>200 OK：表示从客户端发来的请求在服务器端被正常的处理了</p>
+<p>204 NO CONTENT：请求成功处理，没有资源可返回</p>
+<p>206 PATIAL CONTENT：表示客户端进行了范围请求，服务端成功执行了这部分</p>
+<p>301 MOVED PERMANENTLY：需要进行书签引用的变更，永久性重定向</p>
+<p>302 FOUND：临时性重定向，资源不是被永久移动而是临时性质</p>
+<p>303 SEE OTHER：与302大致相同，但303明确表示使用GET方法访问</p>
+<p>304 NOT MODIFIED：找到资源，未符合条件请求，返回时不包含任何相应的主体部分</p>
+<p>307 TEMPORARY REDIRECT：临时重定向，与302大致相同</p>
+<p>400 BAD REQUEST：请求报文中存在语法错误</p>
+<p>401 UNAUTHORIZED：请求需要有通过HTTP认证的认证信息</p>
+<p>403 FORBIDDEN：对请求资源的访问被服务器拒绝</p>
+<p>404 NOT FOUND：服务器上无法找到请求资源</p>
+<p>500 INTERNAL SERVER ERROR：服务器端在执行请求时发生错误</p>
+<p>503 SERVICE UNAVAILABLE：服务器暂时处于超负载或停机维护，无法处理请求</p>
+</li>
+<li><p><strong>状态码和状态不一致</strong></p>
+</li>
+</ol>
+<h1 id="第五章-与HTTP协作的WEB服务器"><a href="#第五章-与HTTP协作的WEB服务器" class="headerlink" title="第五章 与HTTP协作的WEB服务器"></a>第五章 与HTTP协作的WEB服务器</h1><ol>
+<li>在相同的IP地址下，由于虚拟主机可以寄存多个不同主机名和域名的web网站，因此在发送HTTP请求时，必须在HOST首部内完整指定主机名或域名的URL</li>
+<li>代理是一种有转发功能的应用程序，网关是转发其他服务器通信数据的服务器，隧道是在两者之间进行中转并保持双方通信连接的应用程序</li>
+<li>缓存代理、透明代理</li>
+<li>网关可以由HTTP请求转化为其他协议通信</li>
+<li>隧道的目的是确保客户端与服务端安全通信，隧道不会解析HTTP请求</li>
+</ol>
+<h1 id="第六章-HTTP首部"><a href="#第六章-HTTP首部" class="headerlink" title="第六章 HTTP首部"></a>第六章 HTTP首部</h1><ol>
+<li><p>HTTP首部字段将定义成缓存代理和非缓存代理行为，分成两种类型：端到端首部和逐跳首部</p>
+</li>
+<li><p>cache-control字段能操作缓存的工作机制</p>
+</li>
+<li><p>表示是否能缓存的指令：</p>
+<p>public指令。明确表示其他用户也可以利用缓存</p>
+<p>private指令。响应只以特定用户作为对象</p>
+<p>no-cache指令。客户端不会接收缓存过的指令，目的是为了防止从缓存中返回过期的资源</p>
+</li>
+<li><p>控制可执行缓存的对象的指令：</p>
+<p>no-store指令。规定缓存不能在本地存储请求或响应的任一部分</p>
+</li>
+<li><p>指定缓存期限和认证的指令：</p>
+<p>s-maxage指令。与max-age相同，但但只适用于供多位用户使用的公共缓存服务器</p>
+<p>max-age指令。缓存服务器不对资源有效性再做确认，数值代表资源保存为缓存的最长时间</p>
+<p>min-fresh指令。</p>
+<p>max-stale指令。可指示缓存资源，即使过期也接收</p>
+<p>…</p>
+</li>
+<li><p>connection字段的作用：控制不再转发给代理的首部字段，管理持久连接</p>
+</li>
+<li><p>Date表明创建HTTP报文的日期和时间</p>
+</li>
+<li><p>q是权重值，取值1~0</p>
+</li>
+<li><p>host会告诉服务器请求资源所处的互联网主机名和端口号</p>
+</li>
+<li><p>referer字段会告知服务器请求的原始资源的URL</p>
+</li>
+<li><p>user-agent字段会将创建请求的浏览器和用户代理名称等信息传达给服务器</p>
+</li>
+<li><p>age字段告知客户端源服务器在多久前创建了响应，代理创建响应时必须加上age</p>
+</li>
+<li><p>etag字段可将资源以字符串的形式做唯一性标识</p>
+</li>
+<li><p>location可以将响应接收方引导至某个与请求URL位置不同的资源</p>
+</li>
+<li><p>实体首部allow字段用于通知客户端能够支持指定资源的所有HTTP方法</p>
+</li>
+<li><table>
+<thead>
+<tr>
+<th>首部字段名</th>
+<th>说明</th>
+<th>首部类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Set-Cookie</td>
+<td>开始状态管理所使用的Cookie信息</td>
+<td>响应首部字段</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>服务器接收到的Cookie信息</td>
+<td>请求首部字段</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>一旦Cookie从服务器端发送至客户端，服务器端就不存在可以显式删除Cookie的方法，可以通过覆盖已过期的Cookie实现对客户端Cookie的实质性删除操作</p>
+</li>
+<li><p>HttpOnly属性可以防止XSS</p>
+</li>
+</ol>
+<h1 id="第七章-确保WEB安全的HTTPS"><a href="#第七章-确保WEB安全的HTTPS" class="headerlink" title="第七章 确保WEB安全的HTTPS"></a>第七章 确保WEB安全的HTTPS</h1><ol>
+<li><p>HTTP的不足：</p>
+<ul>
+<li>通信使用明文（不加密），内容可能会被窃听</li>
+<li>不验证通信方身份，有可能遭遇伪装</li>
+<li>无法证明报文完整性，有可能已遭篡改</li>
+</ul>
+</li>
+<li><p>通信加密：SSL（安全套接层）和TLS（安全传输层协议），HTTPS=HTTP+SSL</p>
+</li>
+<li><p>内容加密</p>
+</li>
+<li><p>通过SSL使用证书</p>
+</li>
+<li><p>中间人攻击（MITM）：请求或响应在传输途中遭攻击者拦截并篡改内容的攻击</p>
+</li>
+<li><p>HTTP+加密+认证+完整性保护=HTTPS</p>
+<p>HTTPS其实就是身披SSL协议外壳的HTTP</p>
+</li>
+<li><p>共享密钥加密-公开密钥加密</p>
+</li>
+<li><p>HTTPS采用混合加密机制：在交换密钥环节使用共享密钥加密，在建立通信交换报文阶段使用共享密钥加密</p>
+</li>
+</ol>
+<h1 id="第八章-确认访问用户身份的认证"><a href="#第八章-确认访问用户身份的认证" class="headerlink" title="第八章 确认访问用户身份的认证"></a>第八章 确认访问用户身份的认证</h1><ol>
+<li>BASIC认证（基本认证）：采用Base64编码，无法实现认证注销操作</li>
+<li>DIGEST认证（摘要认证）：接收质询码，返回响应码，nonce字段，提供防止密码被窃听的保护机制，不存在防止用户伪装的保护机制</li>
+<li>SSL客户端认证：客户端证书，双因素认证</li>
+<li>使用Cookie来管理Session（会话）</li>
+</ol>
+<h1 id="第九章-基于HTTP的功能追加协议"><a href="#第九章-基于HTTP的功能追加协议" class="headerlink" title="第九章 基于HTTP的功能追加协议"></a>第九章 基于HTTP的功能追加协议</h1><ol>
+<li>Ajax：利用JavaScript和DOM达到局部WEB页面替换加载的异步通信手段</li>
+<li>Comet：通过延迟应答，模拟实现服务器端向客户端推送的功能</li>
+<li>SPDY：没有完全改写HTTP协议，而是在TCP/IP应用层与传输层之间通过新加会话层的形式运作，规定通信中使用SSL</li>
+<li>使用SPDY后HTTP新增功能：多路复用流，赋予请求优先级，压缩HTTP首部，推送功能，服务器提示功能</li>
+<li>WebSocket：建立联系后双方都可以直接向对方发送报文</li>
+</ol>
+<h1 id="第十章-构建Web内容的技术"><a href="#第十章-构建Web内容的技术" class="headerlink" title="第十章 构建Web内容的技术"></a>第十章 构建Web内容的技术</h1><h1 id="第十一章-Web的攻击技术"><a href="#第十一章-Web的攻击技术" class="headerlink" title="第十一章 Web的攻击技术"></a>第十一章 Web的攻击技术</h1>
+    </div>
+
+    
+        <hr class="fhr">
+        <div id="vcomments"></div>
+    
+</div>
+    <div class="footer" id="footer">
+    <p>Trc0g ©2021 Sunset</a>.
+        <label class="el-switch el-switch-green el-switch-sm" style="vertical-align: sub;">
+            <input type="checkbox" name="switch" id="update_style">
+            <span class="el-switch-style"></span>
+        </label>
+<!--         <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1278548644'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/stat.php%3Fid%3D1278548644%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+        </script> -->
+    </p>
+</div>
+<input type="hidden" id="web_style" value="black">
+<input type="hidden" id="valine_appid" value="CmCti21ooOOIzFOhEyFkFvR0-gzGzoHsz">
+<input type="hidden" id="valine_appKey" value="FqiyUqbg7McKN2eG0MCewupf">
+
+<script src="/libs/jquery.min.js"></script>
+
+
+<script src="/libs/highlight/highlight.pack.js"></script>
+
+<script src='//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+
+<script src="/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+    color: #698fca;
+}
+
+.v .vlist .vcard .vhead .vsys {
+    color: #3a3e4a;
+}
+
+.v .vlist .vcard .vh .vmeta .vat {
+    color: #638fd5;
+}
+
+.v .vlist .vcard .vhead .vnick {
+    color: #6ba1ff;
+}
+
+.v a {
+    color: #8696b1;
+}
+
+.v .vlist .vcard .vhead .vnick:hover {
+    color: #669bfc;
+}
+</style>
+</body>
+
+</html>
